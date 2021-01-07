@@ -4,6 +4,15 @@ from time import time
 
 from process_decorator import async_process
 
+@async_process()
+async def async_test(*args):
+    await asyncio.sleep(.1)
+    return args
+
+@async_process(10)
+async def async_test_with_cache(*args, **kwargs):
+    await asyncio.sleep(.1)
+    return args
 
 def e_func1():
     return 2 ** 1000000001
@@ -72,3 +81,11 @@ class ProcessDecorator(unittest.TestCase):
             e_func4()
         print(f'time exec without decorator {time() - t}')
         self.assertEqual(res, [e_func3(), e_func4()])
+
+    def test_async_func(self):
+        res = asyncio.run(async_test(1,2,3))
+        self.assertEqual(res, (1,2,3))
+        res = asyncio.run(async_test_with_cache(1, 2, 3))
+        self.assertEqual(res, (1, 2, 3))
+        res = asyncio.run(async_test_with_cache(1, 2, 3))
+        self.assertEqual(res, (1, 2, 3))

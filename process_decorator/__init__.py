@@ -10,7 +10,7 @@ _GLOB_FUNC_QUEUE_STORAGE = {}
 
 ctx = get_context()
 async def _func_process(func, input: ctx.Queue, output, exit_timer):
-    is_coro = asyncio.iscoroutine(func)
+    is_coro = asyncio.iscoroutinefunction(func)
     timer = time()
     while timer+exit_timer > time():
         try:
@@ -28,7 +28,7 @@ async def _func_process(func, input: ctx.Queue, output, exit_timer):
 
 
 async def _one_time_func_process(func, output, args, kwargs):
-    is_coro = asyncio.iscoroutine(func)
+    is_coro = asyncio.iscoroutinefunction(func)
     result = func(*args, **kwargs)
     if is_coro:
         result = await result
