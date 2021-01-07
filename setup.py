@@ -8,7 +8,7 @@ setup(
     name='process_decorator',
     version='0.1',
     packages=['process_decorator', 'process_decorator.shared'],
-    url='',
+    url='https://github.com/Saylermb/process_decorator',
     license='',
     author='saylermb',
     author_email='Saylermb@gmail.com',
