@@ -49,6 +49,11 @@ def func3():
 def func4():
     return 2 ** 20000002
 
+@async_process(exit_process_timer=5)
+async def func5(i):
+    asyncio.sleep(1)
+    return i
+
 
 class ProcessDecorator(unittest.TestCase):
 
@@ -89,3 +94,11 @@ class ProcessDecorator(unittest.TestCase):
         self.assertEqual(res, (1, 2, 3))
         res = asyncio.run(async_test_with_cache(1, 2, 3))
         self.assertEqual(res, (1, 2, 3))
+
+    async def _test_delivery(self):
+        return await asyncio.gather(func5(1), func5(2),func5(3),func5(4))
+
+    def test_delivery(self):
+        for _ in range(10):
+            res = asyncio.run(self._test_delivery())
+            self.assertEqual(res, (1, 2, 3, 4))

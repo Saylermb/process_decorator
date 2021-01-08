@@ -12,7 +12,7 @@ ctx = get_context()
 async def _func_process(func, input: ctx.Queue, output, exit_timer):
     is_coro = asyncio.iscoroutinefunction(func)
     timer = time()
-    while timer+exit_timer > time():
+    while exit_timer < 0 or timer+exit_timer > time():
         try:
             args, kwargs = input.get_nowait()
         except _queue.Empty:
@@ -87,7 +87,7 @@ def async_process(exit_process_timer=0):
     def inner_function(func):
         @wraps(func)
         async def wrapper(*args, **kwargs):
-            if exit_process_timer > 0:
+            if exit_process_timer != 0:
                 return await _async_process_with_cache(func, exit_process_timer, args, kwargs)
             else:
                 return await _create_one_time_process(func, args, kwargs)
