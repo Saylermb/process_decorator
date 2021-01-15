@@ -16,7 +16,7 @@ async def _func_process(func, input: ctx.Queue, output, exit_timer):
         try:
             args, kwargs = input.get_nowait()
         except _queue.Empty:
-            await sleep(.00001)
+            await sleep(.0001)
             continue
         result = func(*args, **kwargs)
         if is_coro:
@@ -62,7 +62,7 @@ async def _create_one_time_process(func, args, kwargs):
             result = queue.get_nowait()
             break
         except _queue.Empty:
-            await asyncio.sleep(.00001)
+            await asyncio.sleep(.0001)
     queue.close()
     return result
 
