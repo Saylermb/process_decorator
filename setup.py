@@ -6,7 +6,7 @@ with open('README.md', encoding='utf-8') as f:
 
 setup(
     name='process_decorator',
-    version='0.5',
+    version='0.6',
     packages=['process_decorator', 'process_decorator.shared'],
     url='https://github.com/Saylermb/process_decorator',
     license='',
