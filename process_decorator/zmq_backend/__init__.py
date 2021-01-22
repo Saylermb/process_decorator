@@ -1,6 +1,5 @@
 import asyncio
 import pickle
-from asyncio import sleep
 from functools import wraps
 from multiprocessing import get_context
 import zmq.asyncio
@@ -50,10 +49,8 @@ def _create_process(func, exit_timer):
 async def _async_process_with_cache(func, exit_process_timer, args, kwargs):
     queue = _GLOB_FUNC_QUEUE_STORAGE.get(str(func))
     if queue is None:
-        print('get new')
         sender, r, p = _create_process(func, exit_process_timer)
     else:
-        print('get old')
         sender, r, p = queue
     await sender.send((pickle.PickleBuffer(pickle.dumps((args, kwargs), protocol=-1))))
     result = await r.recv()
