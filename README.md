@@ -4,7 +4,7 @@ If you write async code, you now that all code work on one processor (tnx GIL), 
 with execution code in other process.
 
 ATTENTION, we get profit only if function work more than 0.1 sec or if you need make async function.
-AND don't work global variable, because func work in other process
+And don't work global variable, because func work in other process
 ```python
 from process_decorator import async_process
 import asyncio
