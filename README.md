@@ -1,11 +1,11 @@
-## process_decorator
+### process_decorator
 
 If you write async code, you now that all code work on one processor (tnx GIL), but we can resolve this problem
 with execution code in other process.
 
 ATTENTION, we get profit only if function work more than 0.1 sec or if you need make async function.
 And don't work global variable, because func work in other process
-```python
+```python3
 from process_decorator import async_process
 import asyncio
 
@@ -20,7 +20,7 @@ this code creates other process where will be executed.
 
 **async_process** get argument exit_process_timer, witch cache process on time executed.
 If you call this function every time, this parameter will up speed of execution
-```python
+```python3
 from process_decorator import async_process
 import asyncio
 
