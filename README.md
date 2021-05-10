@@ -6,6 +6,7 @@ with execution code in other process.
 ATTENTION, we get profit only if function work more than 0.1 sec or if you need make async function.
 And don't work global variable, because func work in other process
 ```python3
+
 from process_decorator import async_process
 import asyncio
 
