@@ -11,7 +11,7 @@ setup(
               'process_decorator.zmq_backend'],
     url='https://github.com/Saylermb/process_decorator',
     license='',
-    author='saylermb',
+    author='Saylermb',
     author_email='Saylermb@gmail.com',
     description='make func async and execute in other process',
     long_description=long_description,

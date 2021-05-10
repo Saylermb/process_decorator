@@ -4,15 +4,18 @@ from time import time
 
 from process_decorator import async_process
 
+
 @async_process()
 async def async_test(*args):
     await asyncio.sleep(.1)
     return args
 
+
 @async_process(10)
 async def async_test_with_cache(*args, **kwargs):
     await asyncio.sleep(.1)
     return args
+
 
 def e_func1():
     return 2 ** 1000000001
@@ -48,6 +51,7 @@ def func3():
 @async_process(exit_process_timer=5)
 def func4():
     return 2 ** 20000002
+
 
 @async_process(exit_process_timer=5)
 async def func5(i):
@@ -88,15 +92,15 @@ class ProcessDecorator(unittest.TestCase):
         self.assertEqual(res, [e_func3(), e_func4()])
 
     def test_async_func(self):
-        res = asyncio.run(async_test(1,2,3))
-        self.assertEqual(res, (1,2,3))
+        res = asyncio.run(async_test(1, 2, 3))
+        self.assertEqual(res, (1, 2, 3))
         res = asyncio.run(async_test_with_cache(1, 2, 3))
         self.assertEqual(res, (1, 2, 3))
         res = asyncio.run(async_test_with_cache(1, 2, 3))
         self.assertEqual(res, (1, 2, 3))
 
     async def _test_delivery(self):
-        return await asyncio.gather(func5(1), func5(2),func5(3),func5(4))
+        return await asyncio.gather(func5(1), func5(2), func5(3), func5(4))
 
     def test_delivery(self):
         for _ in range(10):
